@@ -7,8 +7,15 @@
 
 	<file name="$sourcedir/Display.php">
 		<operation>
-			<search position="replace"><![CDATA[]]></search>
-			<add><![CDATA[]]></add>
+			<search position="replace"><![CDATA[id_msg, icon, subject, poster_time, poster_ip, id_member, modified_time, modified_name, body,]]></search>
+			<add><![CDATA[id_msg, icon, subject, poster_time, poster_ip, id_member, modified_time, modified_name, body, show_thumbnail,]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[// Is this user the message author?]]></search>
+			<add><![CDATA[// Append the SAIOM value
+	$output['show_thumbnail'] = !empty($message['show_thumbnail']) ? 1 : 0;
+
+	// Is this user the message author?]]></add>
 		</operation>
 	</file>
 
