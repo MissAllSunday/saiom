@@ -101,6 +101,26 @@
 			);
 			// The message they were trying to edit was most likely deleted.]]></add>
 		</operation>
+
+		<operation>
+			<search position="replace"><![CDATA[// Allow moderators to change names....
+			if (allowedTo('moderate_forum') && !empty($topic))]]></search>
+			<add><![CDATA[// SAIOM mod
+			$context['show_thumbnail'] = !empty($row['show_thumbnail']) ? 1 : 0;
+
+			// Allow moderators to change names....
+			if (allowedTo('moderate_forum') && !empty($topic))]]></add>
+		</operation>
+
+		<operation>
+			<search position="replace"><![CDATA[// Get the stuff ready for the form.
+		$form_subject = $row['subject'];]]></search>
+			<add><![CDATA[// SAIOM mod
+		$context['show_thumbnail'] = !empty($row['show_thumbnail']) ? 1 : 0;
+
+		// Get the stuff ready for the form.
+		$form_subject = $row['subject'];]]></add>
+		</operation>
 	</file>
 
 	<file name="$sourcedir/Subs-Post.php">
