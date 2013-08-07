@@ -42,8 +42,8 @@
 
 	<file name="$themedir/Display.template.php">
 		<operation>
-			<search position="replace"><![CDATA[]]></search>
-			<add><![CDATA[]]></add>
+			<search position="replace"><![CDATA[if ($attachment['is_image'])]]></search>
+			<add><![CDATA[if ($attachment['is_image'] && !empty($message['show_thumbnail']))]]></add>
 		</operation>
 	</file>
 </modification>
