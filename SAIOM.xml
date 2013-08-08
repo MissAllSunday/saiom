@@ -173,8 +173,9 @@
 
 	<file name="$themedir/Post.template.php">
 		<operation>
-			<search position="replace"><![CDATA[]]></search>
-			<add><![CDATA[]]></add>
+			<search position="replace"><![CDATA[' value="1" class="input_check" /> ' . $txt['notify_replies'] . '</label></li>' : '', ']]></search>
+			<add><![CDATA[' value="1" class="input_check" /> ' . $txt['notify_replies'] . '</label></li>' : '', '
+							<li><input type="hidden" name="show_thumbnail" value="0" /><label for="check_show_thumbnail"><input type="checkbox" name="show_thumbnail" id="check_show_thumbnail" ' . (!empty($context['show_thumbnail']) ? ' checked="checked"' : '') . ' value="1" class="input_check" /> ', $txt['saiom_ui'] ,'</label></li>]]></add>
 		</operation>
 	</file>
 
