@@ -121,12 +121,43 @@
 		// Get the stuff ready for the form.
 		$form_subject = $row['subject'];]]></add>
 		</operation>
+		<operation>
+			<search position="replace"><![CDATA['approved' => $becomesApproved,]]></search>
+			<add><![CDATA['approved' => $becomesApproved,
+		'show_thumbnail' => !empty($_POST['show_thumbnail']) ? 1 : 0,]]></add>
+		</operation>
 	</file>
 
 	<file name="$sourcedir/Subs-Post.php">
 		<operation>
-			<search position="replace"><![CDATA[]]></search>
-			<add><![CDATA[]]></add>
+			<search position="replace"><![CDATA[$smcFunc['db_insert']('',
+		'{db_prefix}messages',
+		array(
+			'id_board' => 'int', 'id_topic' => 'int', 'id_member' => 'int', 'subject' => 'string-255', 'body' => (!empty($modSettings['max_messageLength']) && $modSettings['max_messageLength'] > 65534 ? 'string-' . $modSettings['max_messageLength'] : 'string-65534'),
+			'poster_name' => 'string-255', 'poster_email' => 'string-255', 'poster_time' => 'int', 'poster_ip' => 'string-255',
+			'smileys_enabled' => 'int', 'modified_name' => 'string', 'icon' => 'string-16', 'approved' => 'int',
+		),
+		array(
+			$topicOptions['board'], $topicOptions['id'], $posterOptions['id'], $msgOptions['subject'], $msgOptions['body'],
+			$posterOptions['name'], $posterOptions['email'], time(), $posterOptions['ip'],
+			$msgOptions['smileys_enabled'] ? 1 : 0, '', $msgOptions['icon'], $msgOptions['approved'],
+		),
+		array('id_msg')
+	);]]></search>
+			<add><![CDATA[$smcFunc['db_insert']('',
+		'{db_prefix}messages',
+		array(
+			'id_board' => 'int', 'id_topic' => 'int', 'id_member' => 'int', 'subject' => 'string-255', 'body' => (!empty($modSettings['max_messageLength']) && $modSettings['max_messageLength'] > 65534 ? 'string-' . $modSettings['max_messageLength'] : 'string-65534'),
+			'poster_name' => 'string-255', 'poster_email' => 'string-255', 'poster_time' => 'int', 'poster_ip' => 'string-255',
+			'smileys_enabled' => 'int', 'modified_name' => 'string', 'icon' => 'string-16', 'approved' => 'int', 'show_thumbnail' => 'int',
+		),
+		array(
+			$topicOptions['board'], $topicOptions['id'], $posterOptions['id'], $msgOptions['subject'], $msgOptions['body'],
+			$posterOptions['name'], $posterOptions['email'], time(), $posterOptions['ip'],
+			$msgOptions['smileys_enabled'] ? 1 : 0, '', $msgOptions['icon'], $msgOptions['approved'], $msgOptions['show_thumbnail'],
+		),
+		array('id_msg')
+	);]]></add>
 		</operation>
 	</file>
 
