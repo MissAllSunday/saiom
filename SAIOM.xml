@@ -159,6 +159,16 @@
 		array('id_msg')
 	);]]></add>
 		</operation>
+		<operation>
+			<search position="replace"><![CDATA[$messages_columns = array();]]></search>
+			<add><![CDATA[$messages_columns = array();
+	if (isset($msgOptions['show_thumbnail']))
+		$messages_columns['show_thumbnail'] = $msgOptions['show_thumbnail'];]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[$messageInts = array('modified_time', 'id_msg_modified', 'smileys_enabled');]]></search>
+			<add><![CDATA[$messageInts = array('modified_time', 'id_msg_modified', 'smileys_enabled', 'show_thumbnail');]]></add>
+		</operation>
 	</file>
 
 	<file name="$themedir/Post.template.php">
