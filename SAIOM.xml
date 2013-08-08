@@ -182,7 +182,7 @@
 	<file name="$themedir/Display.template.php">
 		<operation>
 			<search position="replace"><![CDATA[if ($attachment['is_image'])]]></search>
-			<add><![CDATA[if ($attachment['is_image'] && !empty($message['show_thumbnail']))]]></add>
+			<add><![CDATA[if ($attachment['is_image'] && $message['show_thumbnail'] == 0)]]></add>
 		</operation>
 	</file>
 <file name="$languagedir/Modifications.english.php">
