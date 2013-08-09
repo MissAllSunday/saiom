@@ -21,8 +21,7 @@
 
 	<file name="$sourcedir/Post.php">
 		<operation>
-			<search position="replace"><![CDATA[// Get the existing message.
-			$request = $smcFunc['db_query']('', '
+			<search position="replace"><![CDATA[$request = $smcFunc['db_query']('', '
 				SELECT
 					m.id_member, m.modified_time, m.smileys_enabled, m.body,
 					m.poster_name, m.poster_email, m.subject, m.icon, m.approved,
@@ -40,8 +39,7 @@
 					'id_msg' => $_REQUEST['msg'],
 				)
 			);]]></search>
-			<add><![CDATA[// Get the existing message.
-			$request = $smcFunc['db_query']('', '
+			<add><![CDATA[$request = $smcFunc['db_query']('', '
 				SELECT
 					m.id_member, m.modified_time, m.smileys_enabled, m.body, m.show_thumbnail,
 					m.poster_name, m.poster_email, m.subject, m.icon, m.approved,
@@ -62,44 +60,22 @@
 		</operation>
 
 		<operation>
-			<search position="replace"><![CDATA[$request = $smcFunc['db_query']('', '
-				SELECT
-					m.id_member, m.modified_time, m.smileys_enabled, m.body,
-					m.poster_name, m.poster_email, m.subject, m.icon, m.approved,
-					IFNULL(a.size, -1) AS filesize, a.filename, a.id_attach,
-					a.approved AS attachment_approved, t.id_member_started AS id_member_poster,
-					m.poster_time
-			FROM {db_prefix}messages AS m
-					INNER JOIN {db_prefix}topics AS t ON (t.id_topic = {int:current_topic})
-					LEFT JOIN {db_prefix}attachments AS a ON (a.id_msg = m.id_msg AND a.attachment_type = {int:attachment_type})
-				WHERE m.id_msg = {int:id_msg}
-					AND m.id_topic = {int:current_topic}',
-				array(
-					'current_topic' => $topic,
-					'attachment_type' => 0,
-					'id_msg' => $_REQUEST['msg'],
-				)
-			);
-			// The message they were trying to edit was most likely deleted.]]></search>
-			<add><![CDATA[$request = $smcFunc['db_query']('', '
-				SELECT
-					m.id_member, m.modified_time, m.smileys_enabled, m.body, m.show_thumbnail,
-					m.poster_name, m.poster_email, m.subject, m.icon, m.approved,
-					IFNULL(a.size, -1) AS filesize, a.filename, a.id_attach,
-					a.approved AS attachment_approved, t.id_member_started AS id_member_poster,
-					m.poster_time
-			FROM {db_prefix}messages AS m
-					INNER JOIN {db_prefix}topics AS t ON (t.id_topic = {int:current_topic})
-					LEFT JOIN {db_prefix}attachments AS a ON (a.id_msg = m.id_msg AND a.attachment_type = {int:attachment_type})
-				WHERE m.id_msg = {int:id_msg}
-					AND m.id_topic = {int:current_topic}',
-				array(
-					'current_topic' => $topic,
-					'attachment_type' => 0,
-					'id_msg' => $_REQUEST['msg'],
-				)
-			);
-			// The message they were trying to edit was most likely deleted.]]></add>
+			<search position="replace"><![CDATA[elseif (isset($_REQUEST['msg']) && !empty($topic))
+	{
+		$_REQUEST['msg'] = (int) $_REQUEST['msg'];
+
+		// Get the existing message.
+		$request = $smcFunc['db_query']('', '
+			SELECT
+				m.id_member, m.modified_time, m.smileys_enabled, m.body,]]></search>
+			<add><![CDATA[elseif (isset($_REQUEST['msg']) && !empty($topic))
+	{
+		$_REQUEST['msg'] = (int) $_REQUEST['msg'];
+
+		// Get the existing message.
+		$request = $smcFunc['db_query']('', '
+			SELECT
+				m.id_member, m.modified_time, m.smileys_enabled, m.body, m.show_thumbnail,]]></add>
 		</operation>
 
 		<operation>
