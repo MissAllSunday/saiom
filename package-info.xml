@@ -8,10 +8,12 @@
 
 	<install for="2.0 - 2.0.99">
 		<database>install.php</database>
+		<modification type="file">SAIOM.xml</modification>
 	</install>
 
 	<uninstall for="2.0 - 2.0.99">
 		<database>install.php</database>
+		<modification type="file" reverse="true">SAIOM.xml</modification>
 	</uninstall>
 
 </package-info>
