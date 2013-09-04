@@ -19,6 +19,16 @@
 		</operation>
 	</file>
 
+	<file name="$sourcedir/MoveTopic.php">
+			<operation>
+				<search position="replace"><![CDATA['smileys_enabled' => 1,
+			);]]></search>
+				<add><![CDATA['smileys_enabled' => 1,
+				'show_thumbnail' => 0,
+			);]]></add>
+			</operation>
+		</file>
+
 	<file name="$sourcedir/Post.php">
 		<operation>
 			<search position="replace"><![CDATA[$request = $smcFunc['db_query']('', '
